@@ -2,10 +2,22 @@ import { Module } from '@nestjs/common';
 import { UsersController } from './users.controller';
 import { UsersService } from './users.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UsersEntity } from './entity/users.entity';
+import { UserEntity } from 'src/entities/user.entity/user.entity';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([UsersEntity])],
+  imports:[TypeOrmModule.forFeature([UserEntity]),
+      PassportModule.register({defaultStrategy : "jwt"}),
+      JwtModule.register(
+        {
+          secret:"kyraKely",
+          signOptions:{
+            expiresIn:300
+          }
+        }
+      )
+  ],
   controllers: [UsersController],
   providers: [UsersService]
 })

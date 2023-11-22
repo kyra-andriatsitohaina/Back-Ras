@@ -1,6 +1,9 @@
-import { Controller, Get,Post, Param, ParseIntPipe, Body, Delete, Patch } from '@nestjs/common';
+import { Controller, Get,Post, Param, ParseIntPipe, Body, Delete, Patch, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { UsersEntity } from './entity/users.entity';
+import { UserEntity } from 'src/entities/user.entity/user.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { editFileName, imageFileFilter } from 'src/interceptors/imageInterceptor';
 
 @Controller('users')
 export class UsersController {
@@ -15,18 +18,50 @@ export class UsersController {
     @Get(":id")
     async find_user(
         @Param("id",ParseIntPipe) id : number
-    ) : Promise<UsersEntity>{
+    ) : Promise<UserEntity>{
         console.log(typeof(id));
         
         return await this.usersService.findUser(id)
     }
 
-    @Post()
+
+    @Post("new")
+    @UseInterceptors(FileInterceptor('photo',
+    {
+        storage: diskStorage({
+            destination:"public/images",
+            filename:editFileName,
+        }),
+        fileFilter:imageFileFilter,
+    }))
     async new_user(
-        @Body() user : Partial<UsersEntity>
-    ) : Promise<string>{
-         await this.usersService.newUser(user)
-         return "user ajouté"
+        @Body() user : UserEntity,
+        @UploadedFile() image : Express.Multer.File
+    ){
+        const newUser={
+            pseudo:user.pseudo,
+            email:user.email,
+            password:user.password,
+            photo:"avatar.png"
+        }
+        if(image !=null){
+            const sary = {filename: image.filename}
+            newUser.photo = sary.filename
+        }
+        const checkEmail = await this.usersService.checkEmail(newUser.email)
+        if(checkEmail.status){
+            await this.usersService.newUser(newUser)
+            return await this.usersService.login_user(newUser)
+        }else{
+            return checkEmail
+        }
+    }
+
+    @Post("auth")
+    async auth_user(
+        @Body() user : Partial<UserEntity>
+    ) {
+         return await this.usersService.login_user(user)
     }
 
     @Delete(":id")
@@ -40,7 +75,7 @@ export class UsersController {
     @Patch(":id")
     async userUpdate(
         @Param("id",ParseIntPipe) id : number,
-        @Body() user : Partial<UsersEntity>
+        @Body() user : Partial<UserEntity>
     ) : Promise<string>{
         await this.usersService.userUpdate(id,user)
         return `user ${id} modifié`
