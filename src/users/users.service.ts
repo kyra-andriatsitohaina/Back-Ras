@@ -71,9 +71,6 @@ export class UsersService {
                 result.message="invalid password"
             }
         }
-        console.log(result);
-        
-        
         return result
     }
 

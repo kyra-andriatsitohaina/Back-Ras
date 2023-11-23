@@ -17,6 +17,7 @@ export class ArticleService {
        
     }
     async createArticle(article:Partial<ArticleEntity>) : Promise<ArticleEntity>{
+        article.date = new Date().toLocaleDateString()
         return await this.articleRepository.save(article)
     }
 

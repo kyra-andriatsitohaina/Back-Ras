@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { AdminController } from './admin.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CategoriesEntity } from 'src/entities/categories.entity/categories.entity';
+import { ProvincesEntity } from 'src/entities/provinces.entity/provinces.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([CategoriesEntity])],
+  imports:[TypeOrmModule.forFeature([ProvincesEntity])],
   providers: [AdminService],
   controllers: [AdminController]
 })

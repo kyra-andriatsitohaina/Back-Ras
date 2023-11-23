@@ -1,18 +1,18 @@
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
-import { CategoriesEntity } from 'src/entities/categories.entity/categories.entity';
 import { Repository } from 'typeorm';
+import { ProvincesEntity } from 'src/entities/provinces.entity/provinces.entity';
 
 @Injectable()
 export class AdminService {
     constructor(
-        @InjectRepository(CategoriesEntity) private adminRepository : Repository<CategoriesEntity>
+        @InjectRepository(ProvincesEntity) private adminRepository : Repository<ProvincesEntity>
     ){}
 
-    async getCategory() : Promise<CategoriesEntity[]>{
+    async getCategory() : Promise<ProvincesEntity[]>{
         return await this.adminRepository.find()
     }
-    async createCategory(Category:Partial<CategoriesEntity>) : Promise<CategoriesEntity>{
+    async createCategory(Category:Partial<ProvincesEntity>) : Promise<ProvincesEntity>{
         return await this.adminRepository.save(Category)
     }
 
@@ -24,7 +24,7 @@ export class AdminService {
         await this.adminRepository.clear()
     }
 
-    async updateCategory(id : number,Category : Partial<CategoriesEntity>){
+    async updateCategory(id : number,Category : Partial<ProvincesEntity>){
         return await this.adminRepository.update(id,Category)
     }
 }

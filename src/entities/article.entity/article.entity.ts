@@ -17,12 +17,16 @@ export class ArticleEntity {
     @Column("text")
     image:string
 
+    
+    @Column()
+    province:string
+
     @Column()
     type:string//rent sale offer
 
     @Column()
-    amenties:string //parking furnished
+    category:string//maison terrain
 
     @Column()
-    category:string
+    date:string
 }

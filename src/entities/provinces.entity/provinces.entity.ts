@@ -1,12 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-@Entity("categories")
-export class CategoriesEntity {
+@Entity("provinces")
+export class ProvincesEntity {
     @PrimaryGeneratedColumn()
     id:number
 
-    @Column("text")
-    category:string
+    @Column()
+    province:string
 
-    @Column("longtext")
+    @Column("text")
     description:string
 }
+

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { CategoriesEntity } from 'src/entities/categories.entity/categories.entity';
+import { ProvincesEntity } from 'src/entities/provinces.entity/provinces.entity';
 
 @Controller('admin')
 export class AdminController {
@@ -14,7 +14,7 @@ export class AdminController {
     }
     @Post("category")
     async new_category(
-        @Body() category : Partial<CategoriesEntity>
+        @Body() category : Partial<ProvincesEntity>
     ) : Promise<string>{
          await this.adminService.createCategory(category)
          return "category ajouté"
@@ -31,7 +31,7 @@ export class AdminController {
     @Patch("category/:id")
     async category_Update(
         @Param("id",ParseIntPipe) id : number,
-        @Body() category : Partial<CategoriesEntity>
+        @Body() category : Partial<ProvincesEntity>
     ) : Promise<string>{
         await this.adminService.updateCategory(id,category)
         return `category ${id} modifié`
