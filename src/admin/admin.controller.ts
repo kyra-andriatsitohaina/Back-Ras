@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { ProvincesEntity } from 'src/entities/provinces.entity/provinces.entity';
+import { AdminEntity } from 'src/entities/admin.entity/admin.entity';
 
 @Controller('admin')
 export class AdminController {
@@ -36,4 +37,20 @@ export class AdminController {
         await this.adminService.updateCategory(id,category)
         return `category ${id} modifié`
     }
+
+    /* Admin Login */
+    @Post("login")
+    async login(
+        @Body() admin : Partial<AdminEntity>
+    ) {
+        return await this.adminService.login(admin)
+    }
+    @Patch("login")
+    async update_admin(
+        @Body() admin : Partial<AdminEntity>
+    ) : Promise<string>{
+        await this.adminService.updateAdmin(admin)
+        return `password modifié`
+    }
+
 }
