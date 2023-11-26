@@ -19,8 +19,6 @@ export class UsersController {
     async find_user(
         @Param("id",ParseIntPipe) id : number
     ) : Promise<UserEntity>{
-        console.log(typeof(id));
-        
         return await this.usersService.findUser(id)
     }
 

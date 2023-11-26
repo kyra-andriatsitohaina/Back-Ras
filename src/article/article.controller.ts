@@ -1,6 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ArticleService } from './article.service';
 import { ArticleEntity } from 'src/entities/article.entity/article.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { editFileName, imageFileFilter } from 'src/interceptors/imageInterceptor';
 
 @Controller('articles')
 export class ArticleController {
@@ -21,9 +24,24 @@ export class ArticleController {
     }
 
     @Post()
+    @UseInterceptors(FileInterceptor('image',
+    {
+        storage: diskStorage({
+            destination:"public/images",
+            filename:editFileName,
+        }),
+        fileFilter:imageFileFilter,
+    }))
     async new_article(
-        @Body() article : Partial<ArticleEntity>
+        @Body() article : Partial<ArticleEntity>,
+        @UploadedFile() image : Express.Multer.File
     ) : Promise<string>{
+        if(image !=null){
+            const sary = {filename: image.filename}
+            article.image = sary.filename
+        }else{
+            article.image = "default.jpg"
+        }
         await this.articleService.createArticle(article)
         return "article ajouté"
     }

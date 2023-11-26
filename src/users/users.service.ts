@@ -20,16 +20,13 @@ export class UsersService {
     }
     async findUser(id : number) : Promise<UserEntity | null>{
         return await this.usersRepository.findOneBy({id})
-       
     }
     
     async checkEmail(email:string){
-        console.log(email);
         const result = {status:false,message:""}
         const user = await this.usersRepository.createQueryBuilder("user")
         .where("user.email = :email",{email})
         .getOne()
-        
         if(user){
             result.status=false
             result.message="email exist"
@@ -47,8 +44,6 @@ export class UsersService {
     }
     async login_user(credentials:Partial<UserEntity>) {
         const {email,password} = credentials    
-        console.log(email);
-        
         const result = {status:false,message:"",data:{}}
         const user = await this.usersRepository.createQueryBuilder("user")
         .where("user.email = :email",{email})

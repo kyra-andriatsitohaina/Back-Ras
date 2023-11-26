@@ -16,16 +16,39 @@ export class ArticleEntity {
 
     @Column("text")
     image:string
-
     
     @Column()
     province:string
 
     @Column()
-    type:string//rent sale offer
+    type:string
 
     @Column()
-    category:string//maison terrain
+    category:string
+
+    @Column()
+    superficie:string
+
+    @Column()
+    chambre:string
+
+    @Column()
+    elec:boolean
+
+    @Column()
+    eau:boolean
+
+    @Column()
+    garage:boolean
+
+    @Column()
+    status:boolean
+
+    @Column()
+    contact:string
+
+    @Column("text")
+    reference:string
 
     @Column()
     date:string
