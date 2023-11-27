@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 26 nov. 2023 à 08:38
+-- Généré le : lun. 27 nov. 2023 à 10:18
 -- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `articles`
 --
 
@@ -34,30 +48,31 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `description` longtext NOT NULL,
   `price` int(11) NOT NULL,
   `image` text NOT NULL,
-  `type` varchar(255) NOT NULL,
   `province` varchar(255) NOT NULL,
   `category` varchar(255) NOT NULL,
-  `date` varchar(255) NOT NULL,
-  `chambre` varchar(255) NOT NULL,
-  `elec` tinyint(4) NOT NULL,
-  `eau` tinyint(4) NOT NULL,
-  `garage` tinyint(4) NOT NULL,
-  `status` tinyint(4) NOT NULL,
   `superficie` varchar(255) NOT NULL,
+  `chambre` varchar(255) NOT NULL,
   `contact` varchar(255) NOT NULL,
   `reference` text NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `favorite` int(11) NOT NULL,
+  `elec` enum('oui','non') NOT NULL DEFAULT 'non',
+  `eau` enum('oui','non') NOT NULL DEFAULT 'non',
+  `garage` enum('oui','non') NOT NULL DEFAULT 'non',
+  `status` enum('oui','non') NOT NULL DEFAULT 'non',
+  `access` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `description`, `price`, `image`, `type`, `province`, `category`, `date`, `chambre`, `elec`, `eau`, `garage`, `status`, `superficie`, `contact`, `reference`) VALUES
-(1, 'trano bongo kely', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi facilis provident debitis ullam perspiciatis officiis aut quas ipsa, eligendi deserunt! Expedita officiis distinctio sed! Exercitationem, deleniti soluta eos delectus ex debitis! Dolore, quas esse corrupti explicabo vitae, deleniti, sunt praesentium nesciunt excepturi eum tempore? Natus quasi nulla ipsam cupiditate repudiandae quidem non laboriosam quas, perspiciatis nobis dolor consequuntur amet expedita, dolores deserunt nihil eveniet doloremque quos officia, repellat sint assumenda. Beatae nam aspernatur error a soluta alias temporibus, est tenetur perspiciatis cum eum dolore ab totam deserunt. Esse maxime unde culpa ratione temporibus. Esse perspiciatis molestias dolores et, voluptatibus maiores.', 150, 'K465038Y78966R236002A194121.jpg', 'sale', 'antananarivo', 'maison', '26/11/2023', '4', 0, 0, 0, 1, '0', '0628024716', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
-(2, 'villa', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi facilis provident debitis ullam perspiciatis officiis aut quas ipsa, eligendi deserunt! Expedita officiis distinctio sed! Exercitationem, deleniti soluta eos delectus ex debitis! Dolore, quas esse corrupti explicabo vitae, deleniti, sunt praesentium nesciunt excepturi eum tempore? Natus quasi nulla ipsam cupiditate repudiandae quidem non laboriosam quas, perspiciatis nobis dolor consequuntur amet expedita, dolores deserunt nihil eveniet doloremque quos officia, repellat sint assumenda. Beatae nam aspernatur error a soluta alias temporibus, est tenetur perspiciatis cum eum dolore ab totam deserunt. Esse maxime unde culpa ratione temporibus. Esse perspiciatis molestias dolores et, voluptatibus maiores.', 200, 'K509577Y945324R886121A970415.jpg', 'rent', 'antananarivo', 'maison', '26/11/2023', '2', 0, 0, 0, 0, '0', '1245798555', 'bbbbbbbbbbbbbbb'),
-(3, 'terrain 1', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi facilis provident debitis ullam perspiciatis officiis aut quas ipsa, eligendi deserunt! Expedita officiis distinctio sed! Exercitationem, deleniti soluta eos delectus ex debitis! Dolore, quas esse corrupti explicabo vitae, deleniti, sunt praesentium nesciunt excepturi eum tempore? Natus quasi nulla ipsam cupiditate repudiandae quidem non laboriosam quas, perspiciatis nobis dolor consequuntur amet expedita, dolores deserunt nihil eveniet doloremque quos officia, repellat sint assumenda. Beatae nam aspernatur error a soluta alias temporibus, est tenetur perspiciatis cum eum dolore ab totam deserunt. Esse maxime unde culpa ratione temporibus. Esse perspiciatis molestias dolores et, voluptatibus maiores.', 700, 'K845277Y479445R799161A463944.jpg', 'rent', 'fianarantsoa', 'maison', '26/11/2023', '2', 0, 0, 0, 0, '200', '1477777777', 'cccccccccc'),
-(4, 'terrain 2', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi facilis provident debitis ullam perspiciatis officiis aut quas ipsa, eligendi deserunt! Expedita officiis distinctio sed! Exercitationem, deleniti soluta eos delectus ex debitis! Dolore, quas esse corrupti explicabo vitae, deleniti, sunt praesentium nesciunt excepturi eum tempore? Natus quasi nulla ipsam cupiditate repudiandae quidem non laboriosam quas, perspiciatis nobis dolor consequuntur amet expedita, dolores deserunt nihil eveniet doloremque quos officia, repellat sint assumenda. Beatae nam aspernatur error a soluta alias temporibus, est tenetur perspiciatis cum eum dolore ab totam deserunt. Esse maxime unde culpa ratione temporibus. Esse perspiciatis molestias dolores et, voluptatibus maiores.', 630, 'K659027Y908544R500357A932700.jpg', 'offer', 'toliara', 'maison', '26/11/2023', '2', 0, 0, 0, 1, '190', '7456668888', 'eeeeeeeee');
+INSERT INTO `articles` (`id`, `title`, `description`, `price`, `image`, `province`, `category`, `superficie`, `chambre`, `contact`, `reference`, `date`, `userId`, `favorite`, `elec`, `eau`, `garage`, `status`, `access`) VALUES
+(1, 'trano  bongo', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam veritatis temporibus maxime enim maiores sint repudiandae molestiae ratione, vero labore eveniet natus recusandae distinctio aliquam. Nostrum voluptatibus similique quod aspernatur! Asperiores, natus aliquam! Itaque voluptatibus nihil natus aliquam incidunt optio iste, exercitationem voluptatem labore dolorem quae quibusdam quasi officiis culpa.', 150, 'K835469Y818901R432928A785392.jpg', 'antananarivo', 'terrain', '200', '0', '1111111111', 'a1a1a', '27/11/2023', 1, 0, 'non', 'non', 'non', 'non', 'moto'),
+(2, 'villa', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam veritatis temporibus maxime enim maiores sint repudiandae molestiae ratione, vero labore eveniet natus recusandae distinctio aliquam. Nostrum voluptatibus similique quod aspernatur! Asperiores, natus aliquam! Itaque voluptatibus nihil natus aliquam incidunt optio iste, exercitationem voluptatem labore dolorem quae quibusdam quasi officiis culpa.', 200, 'K419749Y123651R374762A35795.jpg', 'antananarivo', 'false', '0', '3', '2222222222', 'azeze', '27/11/2023', 1, 0, 'oui', 'oui', 'oui', 'non', '0'),
+(3, 'hilton', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam veritatis temporibus maxime enim maiores sint repudiandae molestiae ratione, vero labore eveniet natus recusandae distinctio aliquam. Nostrum voluptatibus similique quod aspernatur! Asperiores, natus aliquam! Itaque voluptatibus nihil natus aliquam incidunt optio iste, exercitationem voluptatem labore dolorem quae quibusdam quasi officiis culpa.', 250, 'K136389Y318581R552089A66071.jpg', 'antananarivo', 'false', '0', '5', '3333333333', 'ea3', '27/11/2023', 1, 0, 'non', 'oui', 'non', 'non', '0');
 
 -- --------------------------------------------------------
 
@@ -71,32 +86,19 @@ CREATE TABLE IF NOT EXISTS `provinces` (
   `province` varchar(255) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `provinces`
 --
 
 INSERT INTO `provinces` (`id`, `province`, `description`) VALUES
-(1, 'antananarivo', 'tana Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!'),
-(2, 'antsiranana', 'diego-suarez Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!'),
-(3, 'fianarantsoa', 'fianara Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!'),
-(4, 'mahajanga', 'majunga Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!'),
-(5, 'toamasina', 'tamatave Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!'),
-(6, 'toliara', 'tuléar Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt repellendus aspernatur officiis rem dolore suscipit quasi ex magnam modi nesciunt incidunt id praesentium dignissimos corrupti quas repudiandae fuga perferendis iste laborum recusandae quis, odio pariatur ut! Esse aperiam, odit nam provident minima laboriosam similique, obcaecati enim sit hic sequi veniam!');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `type`
---
-
-DROP TABLE IF EXISTS `type`;
-CREATE TABLE IF NOT EXISTS `type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+(1, 'antananarivo', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.'),
+(2, 'antsiranana', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.'),
+(3, 'toamasina', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.'),
+(4, 'toliara', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.'),
+(5, 'fianarantsoa', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.'),
+(6, 'mahajanga', 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad esse ullam consequatur unde voluptatem recusandae est accusantium, iusto excepturi accusamus eaque! Ad beatae eius magnam vitae officia porro quibusdam fugit.');
 
 -- --------------------------------------------------------
 
@@ -111,16 +113,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` text NOT NULL,
   `password` varchar(255) NOT NULL,
   `photo` text NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
 --
 
-INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `photo`, `status`) VALUES
-(1, 'badoda', 'badoda@gmail.com', '$2b$10$TE7YHtY5dtrNWFB2W/7O7eNBRRIc7J3gv0Gf8BjqmVf97rkQTItIu', 'K573289Y655595R461043A913061.png', 0);
+INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `photo`) VALUES
+(1, 'badoda', 'badoda@gmail.com', '$2b$10$TE7YHtY5dtrNWFB2W/7O7eNBRRIc7J3gv0Gf8BjqmVf97rkQTItIu', 'K185825Y452623R263117A924594.png');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

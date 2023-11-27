@@ -16,8 +16,5 @@ export class UserEntity {
 
     @Column("text")
     photo:string
-
-    @Column({default:false})
-    status:boolean
 }
 

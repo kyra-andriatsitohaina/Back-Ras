@@ -2,6 +2,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { ArticleEntity } from 'src/entities/article.entity/article.entity';
 import { Repository } from 'typeorm';
+import { UserEntity } from 'src/entities/user.entity/user.entity';
 
 @Injectable()
 export class ArticleService {
@@ -16,8 +17,10 @@ export class ArticleService {
         return await this.articleRepository.findOneBy({id})
        
     }
-    async createArticle(article:Partial<ArticleEntity>) : Promise<ArticleEntity>{
+    async createArticle(userId:number,article:Partial<ArticleEntity>) : Promise<ArticleEntity> {
         article.date = new Date().toLocaleDateString()
+        article.userId = userId
+        article.favorite = 0
         return await this.articleRepository.save(article)
     }
 

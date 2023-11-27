@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 
 @Entity("articles")
 export class ArticleEntity {
@@ -21,9 +21,6 @@ export class ArticleEntity {
     province:string
 
     @Column()
-    type:string
-
-    @Column()
     category:string
 
     @Column()
@@ -33,15 +30,18 @@ export class ArticleEntity {
     chambre:string
 
     @Column()
+    access:string
+
+    @Column({type:"enum",enum:{OUI:"oui",NON:"non"},default:"non"})
     elec:boolean
 
-    @Column()
+    @Column({type:"enum",enum:{OUI:"oui",NON:"non"},default:"non"})
     eau:boolean
 
-    @Column()
+    @Column({type:"enum",enum:{OUI:"oui",NON:"non"},default:"non"})
     garage:boolean
 
-    @Column()
+    @Column({type:"enum",enum:{OUI:"oui",NON:"non"},default:"non"})
     status:boolean
 
     @Column()
@@ -52,4 +52,12 @@ export class ArticleEntity {
 
     @Column()
     date:string
+
+    @Column()
+    userId: number;
+
+    @Column()
+    favorite:number
+
+    
 }
