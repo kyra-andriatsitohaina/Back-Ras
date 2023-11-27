@@ -47,6 +47,12 @@ export class ArticleEntity {
     @Column()
     contact:string
 
+    @Column()
+    type:string
+
+    @Column()
+    tel:string
+
     @Column("text")
     reference:string
 

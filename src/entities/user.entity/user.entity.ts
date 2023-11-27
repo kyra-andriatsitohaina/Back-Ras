@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
 
 @Entity("users")
 export class UserEntity {
@@ -16,5 +16,7 @@ export class UserEntity {
 
     @Column("text")
     photo:string
+
+
 }
 

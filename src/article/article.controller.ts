@@ -8,7 +8,7 @@ import { editFileName, imageFileFilter } from 'src/interceptors/imageInterceptor
 @Controller('articles')
 export class ArticleController {
     constructor(
-        private articleService : ArticleService 
+        private articleService : ArticleService ,
     ){}
 
     @Get() 
@@ -85,4 +85,18 @@ export class ArticleController {
         await this.articleService.updateArticle(id,article)
         return `article ${id} modifié`
     }
+
+    /* favorites */
+    @Post("/favorite/:userId")
+    async add_favorite(
+        @Param("userId",ParseIntPipe) userId : number,
+        @Body() article : Partial<ArticleEntity>,
+    ) {    
+        return await this.articleService.addFavorite(userId,article)
+    }
+    
+
 }
+
+
+
