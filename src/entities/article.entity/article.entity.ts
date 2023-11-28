@@ -51,19 +51,28 @@ export class ArticleEntity {
     type:string
 
     @Column()
-    tel:string
+    tel_transfert:string
 
     @Column("text")
     reference:string
 
     @Column()
-    date:string
+    name:string
 
     @Column()
-    userId: number;
-
+    userId: number
+    
     @Column()
     favorite:number
+
+    @Column({default:0})
+    date_publication:string
+
+    @Column({default:0})
+    fin_validation:string
+
+    @Column({default:0})
+    validation:number
 
     
 }

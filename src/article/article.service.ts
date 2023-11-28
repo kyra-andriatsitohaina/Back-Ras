@@ -2,15 +2,16 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { ArticleEntity } from 'src/entities/article.entity/article.entity';
 import { Repository } from 'typeorm';
-import { UserEntity } from 'src/entities/user.entity/user.entity';
 import { unlinkSync } from 'fs';
 import { FavoriteEntity } from 'src/entities/favorite.entity/favorite.entity';
+import { TarifEntity } from 'src/entities/tarif.entity/tarif.entity';
 
 @Injectable()
 export class ArticleService {
     constructor(
         @InjectRepository(ArticleEntity) private articleRepository : Repository<ArticleEntity>,
-        @InjectRepository(FavoriteEntity) private FavoriteRepository : Repository<FavoriteEntity>
+        @InjectRepository(FavoriteEntity) private FavoriteRepository : Repository<FavoriteEntity>,
+        @InjectRepository(TarifEntity) private TarifRepository : Repository<TarifEntity>,
     ){}
 
     async getArticle() : Promise<ArticleEntity[]>{
@@ -22,7 +23,6 @@ export class ArticleService {
     }
     // : Promise<ArticleEntity>
     async createArticle(userId:number,article:Partial<ArticleEntity>)  {
-        article.date = new Date().toLocaleDateString()
         article.userId = userId
         article.favorite = 0
         return await this.articleRepository.save(article)
@@ -41,6 +41,19 @@ export class ArticleService {
     }
 
     async updateArticle(id : number,article : Partial<ArticleEntity>){
+        return await this.articleRepository.update(id,article)
+    }
+    async validateArticle(id : number,article : Partial<ArticleEntity>){
+        const mois = article.validation
+        console.log(mois);
+        
+        const date = new Date()
+        const debut = date.toLocaleDateString()
+                            date.setMonth(date.getMonth() + mois)
+        const fin = date.toLocaleDateString()
+
+        article.date_publication = debut
+        article.fin_validation = fin
         return await this.articleRepository.update(id,article)
     }
 
@@ -74,5 +87,11 @@ export class ArticleService {
 
             return {status:true,message:"add favoris"}
         }
+    }
+
+
+    /* tarifs */
+    async getTarif() : Promise<TarifEntity[]>{
+        return await this.TarifRepository.find()
     }
 }

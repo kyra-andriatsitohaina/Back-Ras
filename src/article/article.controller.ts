@@ -10,6 +10,10 @@ export class ArticleController {
     constructor(
         private articleService : ArticleService ,
     ){}
+    @Get("tarifs")
+    async get_tarif(){
+        return await this.articleService.getTarif()
+    }
 
     @Get() 
     async get_article(){
@@ -81,9 +85,16 @@ export class ArticleController {
     async articleUpdate(
         @Param("id",ParseIntPipe) id : number,
         @Body() article : Partial<ArticleEntity>
-    ) : Promise<string>{
+    ) {
         await this.articleService.updateArticle(id,article)
-        return `article ${id} modifié`
+    }
+    
+    @Patch("/validation/:id")
+    async validation(
+        @Param("id",ParseIntPipe) id : number,
+        @Body() article : Partial<ArticleEntity>
+    ) {
+        await this.articleService.validateArticle(id,article)
     }
 
     /* favorites */
@@ -95,7 +106,6 @@ export class ArticleController {
         return await this.articleService.addFavorite(userId,article)
     }
     
-
 }
 
 
