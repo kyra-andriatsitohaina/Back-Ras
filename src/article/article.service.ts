@@ -45,8 +45,6 @@ export class ArticleService {
     }
     async validateArticle(id : number,article : Partial<ArticleEntity>){
         const mois = article.validation
-        console.log(mois);
-        
         const date = new Date()
         const debut = date.toLocaleDateString()
                             date.setMonth(date.getMonth() + mois)
@@ -54,6 +52,14 @@ export class ArticleService {
 
         article.date_publication = debut
         article.fin_validation = fin
+        return await this.articleRepository.update(id,article)
+    }
+    async deleteValidation(id : number,article : Partial<ArticleEntity>){
+        article.date_publication = "0"
+        article.fin_validation = "0"
+        console.log(id);
+        console.log(article);
+        
         return await this.articleRepository.update(id,article)
     }
 
@@ -68,7 +74,6 @@ export class ArticleService {
         .where("favorites.user = :id",{id})
         .andWhere("favorites.article_id = :articleId",{articleId:favorite.article_id})
         .getOne();
-        console.log(checkFavorite)
         
         if(checkFavorite){
             const article = await this.articleRepository.findOneBy({id:favorite.article_id})

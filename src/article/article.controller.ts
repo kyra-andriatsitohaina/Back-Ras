@@ -96,6 +96,13 @@ export class ArticleController {
     ) {
         await this.articleService.validateArticle(id,article)
     }
+    @Patch("/delValidation/:id")
+    async delValidation(
+        @Param("id",ParseIntPipe) id : number,
+        @Body() article : Partial<ArticleEntity>
+    ) {
+        await this.articleService.deleteValidation(id,article)
+    }
 
     /* favorites */
     @Post("/favorite/:userId")

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 28 nov. 2023 à 19:07
+-- Généré le : mer. 29 nov. 2023 à 19:23
 -- Version du serveur : 10.6.5-MariaDB
 -- Version de PHP : 7.4.26
 
@@ -33,7 +33,14 @@ CREATE TABLE IF NOT EXISTS `admin` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `admin`
+--
+
+INSERT INTO `admin` (`id`, `email`, `password`) VALUES
+(1, 'rasamygab@gmail.com', '$2b$10$TE7YHtY5dtrNWFB2W/7O7eS.Andnq4AxM4q.Pir1HKFrTAwjCJQiG');
 
 -- --------------------------------------------------------
 
@@ -68,7 +75,20 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `fin_validation` varchar(255) NOT NULL DEFAULT '0',
   `validation` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `articles`
+--
+
+INSERT INTO `articles` (`id`, `title`, `description`, `price`, `image`, `province`, `category`, `superficie`, `chambre`, `access`, `elec`, `eau`, `garage`, `status`, `contact`, `type`, `tel_transfert`, `reference`, `name`, `userId`, `favorite`, `date_publication`, `fin_validation`, `validation`) VALUES
+(1, 'trano 3', 'La distance est grande entre nous, mais l\'amour rapproche nos cœurs. J\'ai hâte de te retrouver pour te prouver mon amour, te serrer dans mes bras, et te couvrir de baisers. J\'espère que ces quelques lignes sauront susciter en toi un peu plus encore l\'impatience de me retrouver. Nous profiterons alors comme il se doit de ces moments qui n\'appartiennent qu\'à nous.', 150, 'K63767Y962473R694215A794995.jpg', 'antananarivo', 'terrain', '400', '0', 'vehicule', 'non', 'non', 'non', 'oui', '03232414148', 'rent', '0334455544', 'ref 1-tf-bam', 'rakoto be ', 1, 5, '29/11/2023', '29/02/2024', 3),
+(2, 'terrain 2', 'A tes côtés, je m\'épanouis, à tes côtés, je me sens en vie. Merci pour tous ces bonheurs que tu m\'apportes, merci de partager les bons et les mauvais moments chaque jour.', 200, 'K196485Y377044R349590A948739.jpg', 'fianarantsoa', 'terrain', '0', '4', 'moto', 'oui', 'oui', 'oui', 'oui', '0347777889', 'rent', '0324788899', 'ref-badoda', 'badoda', 1, 1, '29/11/2023', '29/05/2024', 6),
+(3, 'trano 4', 'Combien de lettres nous sommes-nous envoyées depuis que nous sommes ensemble ? Sans doute pas assez encore. Parce qu\'il n\'y a pas de mots assez nombreux, ni assez forts, pour exprimer l\'intensité de ma passion. Chaque jour, j\'ai envie de crier au monde entier, et d\'écrire en grandes lettres rouges , à quel point je t\'aime. Parce qu\'à jamais, ce que je ressens pour toi est gravé dans ma mémoire et dans mon cœur. Je t\'aime.', 0, 'K596420Y152398R947079A146127.jpg', 'mahajanga', 'maison', '0', '0', 'moto', 'non', 'oui', 'non', 'non', '2333333333', 'rent', '0347787112', 'ref-tsaiko', 'balita', 1, 3, '0', '0', 12),
+(4, 'terrain', 'Quand je pense à toi, je deviens pleinement moi. Tu as su me révéler, me sublimer, me transformer. Grâce à toi, je suis heureux / se, pleinement amoureux / se. Merci de tout ce que tu m\'apportes, merci d\'être à mes côtés. Je t\'aime.', 50, 'K706873Y114475R127877A980077.jpg', 'toliara', 'terrain', '4111', '0', 'moto', 'non', 'non', 'non', 'oui', '0381744895', 'sale', '0389966666', 'ref-ourahhh', 'ketaka', 1, 1, '29/11/2023', '29/12/2023', 1),
+(6, 'terrain 1', 'Depuis le temps que nous partageons notre amour sans aucun nuage, je me suis rendu compte à quel point tu comptais pour moi. C\'est à tes côtés que je veux construire ma vie, que nous avancions main dans la main. Veux-tu devenir ma femme/mon mari ?', 280, 'K475845Y134744R118179A754000.jpg', 'antananarivo', 'terrain', '200', '0', 'voiture', 'non', 'non', 'non', 'non', '0345577788', 'offer', '0327841699', 'ref-???', 'kivy', 2, 0, '0', '0', 6),
+(7, 'trano kely', 'Chacun des kilomètres qui nous séparent me donne de la force pour tenir. Tu es loin de moi, mais l\'amour me donne des ailes pour faire face à la distance qui nous sépare. Notre amour ne connaît pas de limites, nous vivrons ensemble des jours heureux, car je t\'aime.', 10, 'K620831Y328587R697222A717780.jpg', 'antananarivo', 'maison', '0', '4', 'moto', 'oui', 'oui', 'non', 'oui', '0202452214', 'rent', '0343322451', 'ref-trans ', 'bozy mpanera', 2, 4, '29/11/2023', '29/12/2023', 1),
+(8, 'trano 2', 'Lève-toi , paresseuse ! allons, voici le jour.\r\nTout rit à l\'aube, et moi je ris à mon aurore ;\r\nLa matinée est belle, et toi plus belle encore ;\r\nLe jour qui te réveille éveille aussi l\'amour.\r\n', 140, 'K739054Y447055R825823A903851.jpg', 'antananarivo', 'maison', '0', '3', 'voiture', 'non', 'oui', 'oui', 'oui', '0326514852', 'rent', '0341047825', 'ref-trano 2', 'basil', 2, 0, '29/11/2023', '29/12/2023', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +103,16 @@ CREATE TABLE IF NOT EXISTS `favorites` (
   `article_id` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `favorites`
+--
+
+INSERT INTO `favorites` (`id`, `article_title`, `article_id`, `user`) VALUES
+(2, 'trano 2', 1, 1),
+(4, 'azygfuyazfazyftaz', 7, 2),
+(5, 'terrain', 4, 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +178,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(255) NOT NULL,
   `photo` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `pseudo`, `email`, `password`, `photo`) VALUES
+(1, 'badoda', 'badoda@gmail.com', '$2b$10$TE7YHtY5dtrNWFB2W/7O7eNBRRIc7J3gv0Gf8BjqmVf97rkQTItIu', 'K479781Y718695R356962A529994.png'),
+(2, 'test', 'test@gmail.com', '$2b$10$TE7YHtY5dtrNWFB2W/7O7e83PdHBwIGdClaLgj4R7/ilHTrlO1nB6', 'K901418Y420433R405363A137129.jpg');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
